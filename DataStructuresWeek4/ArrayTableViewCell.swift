@@ -12,5 +12,6 @@ import UIKit
 class ArrayTableViewCell: UITableViewCell {
   
    
+  @IBOutlet weak var lblDisplay: UILabel!
   
 }

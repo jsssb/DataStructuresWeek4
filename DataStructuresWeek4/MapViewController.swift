@@ -29,6 +29,40 @@ class MapViewController: UIViewController, UITableViewDataSource,UITableViewDele
   override func viewDidLoad() {
     super.viewDidLoad()
     dataMap = [String: String]()
+  
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.keyboardWillShow(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+    
+    
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.keyboardWillHide(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+
+
+  }
+  
+  func keyboardWillShow(notification: NSNotification) {
+    txtKey.backgroundColor = UIColor(
+      red:1.0,
+      green:0.0,
+      blue:0.0,
+      alpha:1.0)
+    txtValue.backgroundColor = UIColor(
+      red:1.0,
+      green:0.0,
+      blue:0.0,
+      alpha:1.0)
+  }
+  
+  func keyboardWillHide(notification: NSNotification) {
+    txtKey.backgroundColor = UIColor(
+      red:0.0,
+      green:0.0,
+      blue:1.0,
+      alpha:1.0)
+    txtValue.backgroundColor = UIColor(
+      red:0.0,
+      green:0.0,
+      blue:1.0,
+      alpha:1.0)
   }
   //MARK: UITableViewDataSources
   
@@ -49,7 +83,8 @@ class MapViewController: UIViewController, UITableViewDataSource,UITableViewDele
     }
     
     
-    let key = dataMap.keys[indexPath.row]
+   // let key = Array(dataMap.keys[indexPath.row])
+    let key = Array(dataMap.keys)[indexPath.row]
     let value = dataMap[key]
     cell.lblKey.text = key
     cell.lblValue.text = value
@@ -70,10 +105,15 @@ class MapViewController: UIViewController, UITableViewDataSource,UITableViewDele
       return
     }
     
-    dataMap?.append[[txtKey.text!: txtValue.text!]]()
+   // dataMap?.append[[txtKey.text!: txtValue.text!]]()
+    dataMap?.updateValue(txtKey.text!, forKey: txtValue.text!)
+    //dataMap?[txtKey.text!] = txtValue.text!
     tableView.reloadData()
     
     txtKey.text = ""
     txtValue.text = ""
   }
+  
+
+  
 }
