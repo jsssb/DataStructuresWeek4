@@ -49,8 +49,11 @@ class ArrayViewController: UIViewController, UITableViewDataSource, UITableViewD
   // MARK: UITextFieldDelegate
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     textField.resignFirstResponder()
-    return true
+        return true
   }
+
+  
+ 
   
   func textFieldDidEndEditing(textField: UITextField) {
     guard txtInput.text?.characters.count  > 0 else{

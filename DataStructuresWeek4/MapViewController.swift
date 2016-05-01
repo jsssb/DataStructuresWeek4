@@ -29,13 +29,15 @@ class MapViewController: UIViewController, UITableViewDataSource,UITableViewDele
   override func viewDidLoad() {
     super.viewDidLoad()
     dataMap = [String: String]()
+   
   
     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.keyboardWillShow(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
     
     
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.keyboardWillHide(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
-
+    tableView.delegate = self
+ tableView.dataSource = self
 
   }
   
